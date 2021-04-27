@@ -9,7 +9,8 @@ import { IUsuario } from '../usuario.model';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { UsuarioService } from '../service/usuario.service';
 import { UsuarioDeleteDialogComponent } from '../delete/usuario-delete-dialog.component';
-
+import { FormBuilder } from '@angular/forms';
+import { UsuarioFilter } from './usuario.filter';
 @Component({
   selector: 'jhi-usuario',
   templateUrl: './usuario.component.html',
@@ -24,12 +25,23 @@ export class UsuarioComponent implements OnInit {
   ascending!: boolean;
   ngbPaginationPage = 1;
 
+  filterForm = this.fb.group({
+    filterNombre: [],
+    filterEmail: [],
+  });
+
+  filtros: UsuarioFilter = new UsuarioFilter();
   constructor(
+    protected fb: FormBuilder,
     protected usuarioService: UsuarioService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected modalService: NgbModal
   ) {}
+  filter(): void {
+    this.createFilterFromForm();
+    this.loadPage();
+  }
 
   loadPage(page?: number, dontNavigate?: boolean): void {
     this.isLoading = true;
@@ -37,6 +49,7 @@ export class UsuarioComponent implements OnInit {
 
     this.usuarioService
       .query({
+        filter: this.filtros.toMap(),
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort(),
@@ -113,5 +126,10 @@ export class UsuarioComponent implements OnInit {
 
   protected onError(): void {
     this.ngbPaginationPage = this.page ?? 1;
+  }
+
+  private createFilterFromForm(): void {
+    this.filtros.nombre = this.filterForm.get(['filterNombre'])!.value;
+    this.filtros.email = this.filterForm.get(['filterEmail'])!.value;
   }
 }

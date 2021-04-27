@@ -24,6 +24,23 @@
 
   <jhi-alert></jhi-alert>
 
+  <!--FORMULARIO BUSQUEDA-->
+
+  <form name="filterform" role="form" novalidate (ngSubmit)="filter()" [formGroup]="filterForm">
+    <div class="row">
+      <div class="form-group">
+        <label class="form-control-label" for="filterNombre">Nombre</label>
+        <input type="text" class="form-control" id="filterNombre" formControlName="filterNombre" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-control-label" for="filterEmail">Email</label>
+        <input type="text" class="form-control" id="filterEmail" formControlName="filterEmail" />
+      </div>
+      <button type="submit" class="btn btn-dark"><fa-icon icon="filter"></fa-icon>&nbsp;<span>Filtrar</span></button>
+    </div>
+  </form>
+
   <div class="alert alert-warning" id="no-result" *ngIf="usuarios?.length === 0">
     <span>No usuarios found</span>
   </div>
@@ -32,12 +49,30 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="apellido1"><span>Apellido 1</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="apellido2"><span>Apellido 2</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="email"><span>Email</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="password"><span>Password</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="id">
+            <span>ID</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="nombre">
+            <span>Nombre</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="apellido1">
+            <span>Apellido 1</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="apellido2">
+            <span>Apellido 2</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <span>Email</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="password">
+            <span>Password</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col"></th>
         </tr>
       </thead>
