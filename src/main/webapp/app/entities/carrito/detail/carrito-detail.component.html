@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="carrito">
+      <h2 data-cy="carritoDetailsHeading"><span>Carrito</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ carrito.id }}</span>
+        </dd>
+        <dt><span>Cantidad</span></dt>
+        <dd>
+          <span>{{ carrito.cantidad }}</span>
+        </dd>
+        <dt><span>Fecha Carrito</span></dt>
+        <dd>
+          <span>{{ carrito.fechaCarrito | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Usuario</span></dt>
+        <dd>
+          <div *ngIf="carrito.usuario">
+            <a [routerLink]="['/usuario', carrito.usuario?.id, 'view']">{{ carrito.usuario?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/carrito', carrito.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

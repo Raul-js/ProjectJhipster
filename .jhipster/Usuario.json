@@ -1,0 +1,49 @@
+{
+  "name": "Usuario",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "apellido1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "apellido2",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "carrito",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "carrito"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "factura",
+      "otherEntityRelationshipName": "usuario",
+      "relationshipName": "factura"
+    }
+  ],
+  "entityTableName": "usuario",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210427102406"
+}
