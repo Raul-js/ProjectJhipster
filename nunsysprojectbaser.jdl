@@ -1,0 +1,63 @@
+
+entity Producto {
+	
+    nombreProducto String,
+    ingredientes String,
+    calorias Integer,
+    imagen Blob,
+    precio Float,
+    existencias Integer
+    
+}
+
+entity TipoProducto {
+	nombreTipoProducto String
+}
+
+
+entity Carrito {
+	cantidad Integer,
+    fechaCarrito Instant
+}
+
+entity Usuario{
+
+  nombre String,
+  apellido1 String,
+  apellido2 String,
+  email String,
+  password String
+}
+
+entity Factura{
+   fechaFactura Instant,
+   cantidadPagada Integer
+}
+
+entity Compra{
+    cantidadComprada Integer,
+    precioPagado Float
+}
+
+relationship OneToMany {
+	TipoProducto{producto} to Producto{tipoproducto},
+	Usuario{carrito} to Carrito{usuario}
+}
+relationship OneToMany{
+     Factura{compra} to Compra{factura}
+}
+
+relationship OneToMany{
+     Usuario{factura} to Factura{usuario}
+}
+
+relationship ManyToMany {
+	Producto{carrito} to Carrito{producto}
+}
+
+
+
+dto * with mapstruct
+service all with serviceImpl
+paginate all with pagination
+filter all

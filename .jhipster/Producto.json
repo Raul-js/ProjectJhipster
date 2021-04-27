@@ -1,0 +1,55 @@
+{
+  "name": "Producto",
+  "fields": [
+    {
+      "fieldName": "nombreProducto",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ingredientes",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "calorias",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "imagen",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    },
+    {
+      "fieldName": "precio",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "existencias",
+      "fieldType": "Integer"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "carrito",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "carrito",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "tipoProducto",
+      "otherEntityRelationshipName": "producto",
+      "relationshipName": "tipoproducto"
+    }
+  ],
+  "entityTableName": "producto",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210427162158"
+}

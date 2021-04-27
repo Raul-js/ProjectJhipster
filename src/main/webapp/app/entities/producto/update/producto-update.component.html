@@ -1,0 +1,132 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-producto-heading" data-cy="ProductoCreateUpdateHeading">Create or edit a Producto</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_nombreProducto">Nombre Producto</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombreProducto"
+            id="field_nombreProducto"
+            data-cy="nombreProducto"
+            formControlName="nombreProducto"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_ingredientes">Ingredientes</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ingredientes"
+            id="field_ingredientes"
+            data-cy="ingredientes"
+            formControlName="ingredientes"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_calorias">Calorias</label>
+          <input type="number" class="form-control" name="calorias" id="field_calorias" data-cy="calorias" formControlName="calorias" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_imagen">Imagen</label>
+          <div>
+            <div *ngIf="editForm.get('imagen')!.value" class="form-text text-danger clearfix">
+              <a class="pull-left" (click)="openFile(editForm.get('imagen')!.value, editForm.get('imagenContentType')!.value)">open</a
+              ><br />
+              <span class="pull-left">{{ editForm.get('imagenContentType')!.value }}, {{ byteSize(editForm.get('imagen')!.value) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ imagen: null }); editForm.patchValue({ imagenContentType: null })"
+                class="btn btn-secondary btn-xs pull-right"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input type="file" id="file_imagen" data-cy="imagen" (change)="setFileData($event, 'imagen', false)" />
+          </div>
+          <input type="hidden" class="form-control" name="imagen" id="field_imagen" data-cy="imagen" formControlName="imagen" />
+          <input
+            type="hidden"
+            class="form-control"
+            name="imagenContentType"
+            id="field_imagenContentType"
+            formControlName="imagenContentType"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_precio">Precio</label>
+          <input type="number" class="form-control" name="precio" id="field_precio" data-cy="precio" formControlName="precio" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_existencias">Existencias</label>
+          <input
+            type="number"
+            class="form-control"
+            name="existencias"
+            id="field_existencias"
+            data-cy="existencias"
+            formControlName="existencias"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="field_carritos">Carrito</label>
+          <select class="form-control" id="field_carritos" data-cy="carrito" multiple name="carritos" formControlName="carritos">
+            <option
+              [ngValue]="getSelectedCarrito(carritoOption, editForm.get('carritos')!.value)"
+              *ngFor="let carritoOption of carritosSharedCollection; trackBy: trackCarritoById"
+            >
+              {{ carritoOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_tipoproducto">Tipoproducto</label>
+          <select class="form-control" id="field_tipoproducto" data-cy="tipoproducto" name="tipoproducto" formControlName="tipoproducto">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                tipoProductoOption.id === editForm.get('tipoproducto')!.value?.id ? editForm.get('tipoproducto')!.value : tipoProductoOption
+              "
+              *ngFor="let tipoProductoOption of tipoProductosSharedCollection; trackBy: trackTipoProductoById"
+            >
+              {{ tipoProductoOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

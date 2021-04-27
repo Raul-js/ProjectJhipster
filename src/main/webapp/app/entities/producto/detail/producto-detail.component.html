@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="producto">
+      <h2 data-cy="productoDetailsHeading"><span>Producto</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ producto.id }}</span>
+        </dd>
+        <dt><span>Nombre Producto</span></dt>
+        <dd>
+          <span>{{ producto.nombreProducto }}</span>
+        </dd>
+        <dt><span>Ingredientes</span></dt>
+        <dd>
+          <span>{{ producto.ingredientes }}</span>
+        </dd>
+        <dt><span>Calorias</span></dt>
+        <dd>
+          <span>{{ producto.calorias }}</span>
+        </dd>
+        <dt><span>Imagen</span></dt>
+        <dd>
+          <div *ngIf="producto.imagen">
+            <a (click)="openFile(producto.imagen, producto.imagenContentType)">open</a>
+            {{ producto.imagenContentType }}, {{ byteSize(producto.imagen) }}
+          </div>
+        </dd>
+        <dt><span>Precio</span></dt>
+        <dd>
+          <span>{{ producto.precio }}</span>
+        </dd>
+        <dt><span>Existencias</span></dt>
+        <dd>
+          <span>{{ producto.existencias }}</span>
+        </dd>
+        <dt><span>Carrito</span></dt>
+        <dd>
+          <span *ngFor="let carrito of producto.carritos; let last = last">
+            <a [routerLink]="['/carrito', carrito?.id, 'view']">{{ carrito.id }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span>Tipoproducto</span></dt>
+        <dd>
+          <div *ngIf="producto.tipoproducto">
+            <a [routerLink]="['/tipo-producto', producto.tipoproducto?.id, 'view']">{{ producto.tipoproducto?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/producto', producto.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -36,6 +36,8 @@
     "serviceDiscoveryType": false,
     "enableHibernateCache": true,
     "reactive": false,
-    "languages": ["en", "fr"]
+    "languages": ["en", "fr"],
+    "entities": ["Producto", "TipoProducto", "Carrito", "Usuario", "Factura", "Compra"],
+    "lastLiquibaseTimestamp": 1619540523000
   }
 }

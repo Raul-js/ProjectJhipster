@@ -1,0 +1,38 @@
+{
+  "name": "Carrito",
+  "fields": [
+    {
+      "fieldName": "cantidad",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "fechaCarrito",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "usuario",
+      "otherEntityRelationshipName": "carrito",
+      "relationshipName": "usuario"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "producto",
+      "otherEntityRelationshipName": "carrito",
+      "relationshipName": "producto",
+      "ownerSide": false
+    }
+  ],
+  "entityTableName": "carrito",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210427162200"
+}

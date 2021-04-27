@@ -95,6 +95,7 @@
   },
   "defaultProject": "projectnunsys",
   "cli": {
+    "analytics": false,
     "packageManager": "npm"
   }
 }
